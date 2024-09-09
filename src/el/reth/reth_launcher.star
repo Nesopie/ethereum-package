@@ -169,6 +169,7 @@ def get_config(
         public_ports_for_component = shared_utils.get_public_ports_for_component(
             "el", port_publisher, participant_index
         )
+        plan.print(public_ports_for_component)
         public_ports, discovery_port = el_shared.get_general_el_public_port_specs(
             public_ports_for_component
         )
@@ -180,7 +181,11 @@ def get_config(
         public_ports.update(
             shared_utils.get_port_specs(additional_public_port_assignments)
         )
-
+        public_ports.update(
+            shared_utils.get_port_specs(
+                {str(index): item for index, item in zip(["a", "b"], [public_ports_for_component[5], public_ports_for_component[6]])}
+            )
+        )
     used_port_assignments = {
         constants.TCP_DISCOVERY_PORT_ID: discovery_port,
         constants.UDP_DISCOVERY_PORT_ID: discovery_port,
@@ -188,6 +193,8 @@ def get_config(
         constants.RPC_PORT_ID: RPC_PORT_NUM,
         constants.WS_PORT_ID: WS_PORT_NUM,
         constants.METRICS_PORT_ID: METRICS_PORT_NUM,
+        "a": public_ports_for_component[5],
+        "b": public_ports_for_component[6],
     }
     used_ports = shared_utils.get_port_specs(used_port_assignments)
 
