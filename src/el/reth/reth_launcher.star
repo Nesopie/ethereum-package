@@ -199,7 +199,7 @@ def get_config(
     used_ports = shared_utils.get_port_specs(used_port_assignments)
 
     cmd = [
-        "/usr/local/bin/mev build" if builder else "reth",
+        "/usr/local/bin/mev build" if builder else "xx",
         "node",
         "-{0}".format(verbosity_level),
         "--datadir=" + EXECUTION_DATA_DIRPATH_ON_CLIENT_CONTAINER,
